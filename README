@@ -1,0 +1,16 @@
+BibTeX to APA
+--------------
+
+Convert a webpage displaying a BibTex citation (like Google Scholar) to an APA-formatted reference.
+
+How to use:
+
+1) Create a new bookmark on your web browser's bookmark bar. For example, in Chrome, right-click the bookmark bar and choose "Add Page...". 
+
+2) Name the bookmark something like "To APA", and then for the URL, paste the following:
+
+javascript:text1 = document.body.textContent;text2 = bibToApa(text1);document.body.textContent = text2;function bibToApa(text){var authors = /author\=\{([^}]+)\}/g.exec(text);var year = /year\=\{([^}]+)\}/g.exec(text);var title = /title\=\{([^}]+)\}/g.exec(text);var journal = /journal\=\{([^}]+)\}/g.exec(text);var volume = /volume\=\{([^}]+)\}/g.exec(text);var number = /number\=\{([^}]+)\}/g.exec(text);var pages = /pages\=\{([^}]+)\}/g.exec(text);newAuthors = authors[1].replace(/^(.*) and (.*?)$/, %27$1 & $2%27);newAuthors = newAuthors.replace(/ and /g, %27, %27);newTitle = title[1].replace(/\{/g, %27%27);newPages = pages[1].replace(/\-\-/g, %27-%27).replace(/\\/g, %27%27);newJournal = journal[1].replace(/\\/g, %27%27).replace(/\&amp\;/g, %27&%27);newJournal = newJournal.replace( /(^|\s)([a-z])/g , function(m,p1,p2){ return p1+p2.toUpperCase(); });newNumber = %27%27;if (number){ newNumber = "(" + number[1] + ")"; };apaFormat = newAuthors + " (" + year[1] + "). " + newTitle + ". " + newJournal + ", " + volume[1] + newNumber + ", " + newPages + ".";return apaFormat;}
+
+3) Go to Google Scholar, and click Scholar Settings in the corner. Under Bibliography manager, choose to show links to import citations into BibTeX.
+
+4) Now, search something on Google Scholar. For example, "Timothy Brady". Under each result, a link that says "Import into BibTeX" should appear. Click this link. Then click the "To APA" bookmark on your toolbar. You should now have an APA-formatted reference for that paper!
